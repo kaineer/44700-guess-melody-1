@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom';
 
 const init = () => {
   const config = {
-    gameTime: 5,
-    errorCount: 3
+    gameTime: 7,
+    errorCount: 4
   };
 
   ReactDOM.render(
