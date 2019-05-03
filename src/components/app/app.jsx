@@ -14,5 +14,5 @@ export const App = ({gameTime, errorCount}) => (
 
 App.propTypes = {
   gameTime: requiredNumber,
-  errorCount: requiredNumber
+  errorCount: requiredNumber,
 };
