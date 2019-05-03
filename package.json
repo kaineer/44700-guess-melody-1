@@ -5,7 +5,8 @@
   "description": "Учебный проект «Угадай мелодию» от HTML Academy",
   "scripts": {
     "eslint": "eslint src/**/*.js src/**/*.jsx --fix",
-    "test": "npm run eslint",
+    "jest": "jest",
+    "test": "npm run eslint && npm run jest",
     "build": "webpack --mode development",
     "start": "webpack-dev-server --open"
   },
@@ -26,5 +27,10 @@
   },
   "engines": {
     "node": "10"
+  },
+  "dependencies": {
+    "babel-jest": "^24.7.1",
+    "jest": "^24.7.1",
+    "react-test-renderer": "^16.8.6"
   }
 }
