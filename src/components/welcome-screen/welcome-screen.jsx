@@ -1,12 +1,12 @@
 import React from 'react';
-import {number} from 'prop-types';
+import {number, func} from 'prop-types';
 
-const {required: requiredNumber} = number;
+const {isRequired: requiredNumber} = number;
 
-export const WelcomeScreen = ({time, errorCount}) => (
+export const WelcomeScreen = ({time, errorCount, onClick = () => null}) => (
   <section className="welcome">
     <div className="welcome__logo"><img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83"/></div>
-    <button className="welcome__button"><span className="visually-hidden">Начать игру</span></button>
+    <button className="welcome__button" onClick={() => onClick()}><span className="visually-hidden">Начать игру</span></button>
     <h2 className="welcome__rules-title">Правила игры</h2>
     <p className="welcome__text">Правила просты:</p>
     <ul className="welcome__rules-list">
@@ -19,5 +19,6 @@ export const WelcomeScreen = ({time, errorCount}) => (
 
 WelcomeScreen.propTypes = {
   time: requiredNumber,
-  errorCount: requiredNumber
+  errorCount: requiredNumber,
+  onClick: func
 };
