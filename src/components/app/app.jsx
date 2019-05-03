@@ -1,7 +1,7 @@
 import React from 'react';
 import {number} from 'prop-types';
 
-const {required: requiredNumber} = number;
+const {isRequired: requiredNumber} = number;
 
 import {WelcomeScreen} from '../welcome-screen/welcome-screen';
 
