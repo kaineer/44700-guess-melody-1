@@ -1,5 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import {number} from 'prop-types';
+
+const {required: requiredNumber} = number;
 
 export const WelcomeScreen = ({time, errorCount}) => (
   <section className="welcome">
@@ -16,6 +18,6 @@ export const WelcomeScreen = ({time, errorCount}) => (
 );
 
 WelcomeScreen.propTypes = {
-  time: PropTypes.number,
-  errorCount: PropTypes.number
+  time: requiredNumber,
+  errorCount: requiredNumber
 };
