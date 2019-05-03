@@ -1,7 +1,7 @@
 import React from 'react';
 import {number} from 'prop-types';
 
-const {required: requiredNumber} = number;
+const {isRequired: requiredNumber} = number;
 
 export const WelcomeScreen = ({time, errorCount}) => (
   <section className="welcome">
