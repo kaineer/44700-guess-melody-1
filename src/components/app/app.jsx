@@ -1,5 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import {number} from 'prop-types';
+
+const {required: requiredNumber} = number;
 
 import {WelcomeScreen} from '../welcome-screen/welcome-screen';
 
@@ -11,6 +13,6 @@ export const App = ({gameTime, errorCount}) => (
 );
 
 App.propTypes = {
-  gameTime: PropTypes.number,
-  errorCount: PropTypes.number
+  gameTime: requiredNumber,
+  errorCount: requiredNumber
 };
