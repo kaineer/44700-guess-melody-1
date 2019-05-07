@@ -27,16 +27,16 @@ export class App extends Component {
     };
 
     if (this.state.question > -1) {
-      const question = questions[this.state.question];
+      const currentQuestion = questions[question];
 
-      switch (question.type) {
+      switch (currentQuestion.type) {
         case `artist`:
           return (
-            <GuessArtist question={question} onSubmit={goNextQuestion} />
+            <GuessArtist question={currentQuestion} onSubmit={goNextQuestion} />
           );
         case `genre`:
           return (
-            <GuessGenre question={question} onSubmit={goNextQuestion} />
+            <GuessGenre question={currentQuestion} onSubmit={goNextQuestion} />
           );
       }
     }
