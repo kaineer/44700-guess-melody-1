@@ -1,13 +1,13 @@
 // src/components/guess-artist/guess-artist.jsx
 
 import React, {Component} from 'react';
-import {string, shape, arrayOf} from 'prop-types';
+import {string, shape, func, arrayOf} from 'prop-types';
 import {GameHeader} from '../game-header/game-header';
 import {GuessArtistItem} from '../guess-artist-item/guess-artist-item';
 
 export class GuessArtist extends Component {
   render() {
-    const {answers} = this.props;
+    const {question: {answers}, onSubmit} = this.props;
 
     return (
       <section className="game game--artist">
@@ -27,6 +27,7 @@ export class GuessArtist extends Component {
                 src={answer.src}
                 artist={answer.artist}
                 orderId={orderId}
+                onClick={onSubmit}
               />
             ))}
           </form>
@@ -37,12 +38,15 @@ export class GuessArtist extends Component {
 }
 
 GuessArtist.propTypes = {
-  song: shape({
-    artist: string,
-    src: string
+  question: shape({
+    song: shape({
+      artist: string,
+      src: string
+    }),
+    answers: arrayOf(shape({
+      picture: string,
+      artist: string
+    }))
   }),
-  answers: arrayOf(shape({
-    picture: string,
-    artist: string
-  }))
+  onSubmit: func
 };

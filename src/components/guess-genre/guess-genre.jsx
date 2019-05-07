@@ -1,13 +1,13 @@
 // src/components/guess-genre/guess-genre.jsx
 
 import React, {Component} from 'react';
-import {string, shape, arrayOf} from 'prop-types';
+import {string, func, shape, arrayOf} from 'prop-types';
 import {GameHeader} from '../game-header/game-header';
 import {GuessGenreItem} from '../guess-genre-item/guess-genre-item';
 
 export class GuessGenre extends Component {
   render() {
-    const {answers} = this.props;
+    const {question: {answers}, onSubmit} = this.props;
 
     return (
       <section className="game game--genre">
@@ -25,7 +25,7 @@ export class GuessGenre extends Component {
               />
             ))}
 
-            <button className="game__submit button" type="submit">Ответить</button>
+            <button className="game__submit button" type="submit" onClick={onSubmit}>Ответить</button>
           </form>
         </section>
       </section>
@@ -34,9 +34,12 @@ export class GuessGenre extends Component {
 }
 
 GuessGenre.propTypes = {
-  genre: string,
-  answers: arrayOf(shape({
-    src: string,
-    genre: string
-  }))
+  question: shape({
+    genre: string,
+    answers: arrayOf(shape({
+      src: string,
+      genre: string
+    })),
+  }),
+  onSubmit: func
 };
