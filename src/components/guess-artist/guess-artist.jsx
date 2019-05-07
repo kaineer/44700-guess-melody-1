@@ -24,7 +24,7 @@ export class GuessArtist extends Component {
             {answers.map((answer, orderId) => (
               <GuessArtistItem
                 key={orderId}
-                src={answer.src}
+                picture={answer.picture}
                 artist={answer.artist}
                 orderId={orderId}
                 onClick={onSubmit}
