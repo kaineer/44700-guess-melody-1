@@ -9,6 +9,7 @@ Enzyme.configure({adapter: new Adapter()});
 describe(`WelcomeScreen e2e`, () => {
   let clickHandler;
   let screen;
+  let button;
 
   beforeEach(() => {
     clickHandler = jest.fn();
@@ -19,13 +20,14 @@ describe(`WelcomeScreen e2e`, () => {
           onClick={clickHandler}
         />
     );
+    button = screen.find(`.welcome__button`);
+  });
+
+  it(`should have a button`, () => {
+    expect(button).toHaveLength(1);
   });
 
   describe(`before button is clicked`, () => {
-    it(`should have a button`, () => {
-      const button = screen.find(`.welcome__button`);
-      expect(button).toHaveLength(1);
-    });
 
     it(`should not call clickHandler`, () => {
       expect(clickHandler).toHaveBeenCalledTimes(0);
@@ -34,7 +36,7 @@ describe(`WelcomeScreen e2e`, () => {
 
   describe(`after button is clicked`, () => {
     beforeEach(() => {
-      screen.find(`.welcome__button`).simulate(`click`);
+      button.simulate(`click`);
     });
 
     it(`should call clickHandler`, () => {

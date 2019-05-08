@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GuessArtistItem should render correctly 1`] = `
+<div
+  className="artist"
+>
+  <input
+    className="artist__input visually-hidden"
+    id="answer-42"
+    name="answer"
+    onClick={[Function]}
+    type="radio"
+    value="artist-42"
+  />
+  <label
+    className="artist__name"
+    htmlFor="answer-42"
+  >
+    <img
+      alt="One"
+      className="artist__picture"
+      src=""
+    />
+    One
+  </label>
+</div>
+`;

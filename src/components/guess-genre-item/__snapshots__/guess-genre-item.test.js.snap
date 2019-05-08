@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GuessGenreItem should render correctly 1`] = `
+<div
+  className="track"
+>
+  <button
+    className="track__button track__button--play"
+    type="button"
+  />
+  <div
+    className="track__status"
+  >
+    <audio />
+  </div>
+  <div
+    className="game__answer"
+  >
+    <input
+      className="game__input visually-hidden"
+      id="answer-42"
+      name="answer"
+      type="checkbox"
+      value="answer-42"
+    />
+    <label
+      className="game__check"
+      htmlFor="answer-42"
+    >
+      Отметить
+    </label>
+  </div>
+</div>
+`;
