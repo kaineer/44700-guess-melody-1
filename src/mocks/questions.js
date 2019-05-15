@@ -2,7 +2,7 @@
 
 const ugandaAnthem = (
   `https://upload.wikimedia.org/wikipedia/`.concat(
-    `commons/1/1f/Uganda_flag_and_national_anthem_-_Oh_Uganda_Land_o.ogg`
+      `commons/1/1f/Uganda_flag_and_national_anthem_-_Oh_Uganda_Land_o.ogg`
   )
 );
 
