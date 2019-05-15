@@ -86,16 +86,20 @@ exports[`GuessArtist should render correctly 1`] = `
     <div
       className="game__track"
     >
-      <button
-        className="track__button track__button--play"
-        disabled={true}
-        onClick={[Function]}
-        type="button"
-      />
       <div
-        className="track__status"
+        className="game__track"
       >
-        <audio />
+        <button
+          className="track__button track__button--play"
+          disabled={true}
+          onClick={[Function]}
+          type="button"
+        />
+        <div
+          className="track__status"
+        >
+          <audio />
+        </div>
       </div>
     </div>
     <form

@@ -1,4 +1,4 @@
-import React, {Fragment, Component, createRef} from 'react';
+import React, {Component, createRef} from 'react';
 import {string, bool, func} from 'prop-types';
 
 export const snapshotDummyURL = `void://for-snapshot`;
@@ -52,11 +52,12 @@ export class AudioPlayer extends Component {
 
   render() {
     const {state: {isLoading}, props: {isPlaying}} = this;
+    const buttonModifier = `track__button--${isPlaying ? `pause` : `play`}`;
 
     return (
-      <Fragment>
+      <div className="game__track">
         <button
-          className={`track__button track__button--${isPlaying ? `pause` : `play`}`}
+          className={`track__button ${buttonModifier}`}
           type="button"
           disabled={isLoading}
           onClick={this._onPlayButtonClick}
@@ -64,7 +65,7 @@ export class AudioPlayer extends Component {
         <div className="track__status">
           <audio ref={this._audioRef} />
         </div>
-      </Fragment>
+      </div>
     );
   }
 
