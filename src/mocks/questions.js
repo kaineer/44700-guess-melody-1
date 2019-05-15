@@ -1,19 +1,25 @@
 // src/mocks/questions.js
 
+const ugandaAnthem = (
+  `https://upload.wikimedia.org/wikipedia/`.concat(
+      `commons/1/1f/Uganda_flag_and_national_anthem_-_Oh_Uganda_Land_o.ogg`
+  )
+);
+
 const genreQuestion = {
   type: `genre`,
   genre: `rock`,
   answers: [
     {
-      src: ``,
+      src: ugandaAnthem,
       genre: `rock`
     },
     {
-      src: ``,
+      src: ugandaAnthem,
       genre: `jazz`
     },
     {
-      src: ``,
+      src: ugandaAnthem,
       genre: `blues`
     }
   ]
@@ -23,7 +29,7 @@ const artistQuestion = {
   type: `artist`,
   song: {
     artist: `One`,
-    src: ``
+    src: ugandaAnthem
   },
   answers: [
     {

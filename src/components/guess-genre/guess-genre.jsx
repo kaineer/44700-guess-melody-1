@@ -6,8 +6,17 @@ import {GameHeader} from '../game-header/game-header';
 import {GuessGenreItem} from '../guess-genre-item/guess-genre-item';
 
 export class GuessGenre extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      activePlayer: -1, // none
+    };
+  }
+
   render() {
     const {question: {answers}, onSubmit} = this.props;
+    const {activePlayer} = this.state;
 
     return (
       <section className="game game--genre">
@@ -22,6 +31,10 @@ export class GuessGenre extends Component {
                 src={src}
                 genre={genre}
                 orderId={orderId}
+                isPlaying={orderId === activePlayer}
+                onTogglePlaying={(flag) => this.setState({
+                  activePlayer: flag ? orderId : -1
+                })}
               />
             ))}
 

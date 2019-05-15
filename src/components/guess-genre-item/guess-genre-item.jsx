@@ -1,12 +1,13 @@
 import React from 'react';
-import {string, number} from 'prop-types';
+import {string, number, bool, func} from 'prop-types';
+import {AudioPlayer} from '../audio-player/audio-player';
 
-export const GuessGenreItem = ({orderId}) => (
+export const GuessGenreItem = ({
+  src, orderId, isPlaying, onTogglePlaying
+}) => (
   <div className="track">
-    <button className="track__button track__button--play" type="button"></button>
-    <div className="track__status">
-      <audio></audio>
-    </div>
+    <AudioPlayer {...{src, isPlaying, onTogglePlaying}} />
+
     <div className="game__answer">
       <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${orderId}`} id={`answer-${orderId}`} />
       <label className="game__check" htmlFor={`answer-${orderId}`}>Отметить</label>
@@ -15,7 +16,9 @@ export const GuessGenreItem = ({orderId}) => (
 );
 
 GuessGenreItem.propTypes = {
-  src: string,
-  genre: string,
-  orderId: number
+  src: string.isRequired,
+  genre: string.isRequired,
+  orderId: number.isRequired,
+  isPlaying: bool.isRequired,
+  onTogglePlaying: func.isRequired
 };
