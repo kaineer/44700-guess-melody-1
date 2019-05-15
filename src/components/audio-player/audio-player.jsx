@@ -1,5 +1,5 @@
-import React, {Fragment, Component} from 'react';
-import {string} from 'prop-types';
+import React, {Fragment, Component, createRef} from 'react';
+import {string, bool, func} from 'prop-types';
 
 export const snapshotDummyURL = `void://for-snapshot`;
 
@@ -7,10 +7,11 @@ export class AudioPlayer extends Component {
   constructor(props) {
     super(props);
 
+    this._audioRef = createRef();
+
     this.state = {
       progress: 0,
       isLoading: false,
-      isPlaying: false
     };
 
     this._onPlayButtonClick = this._onPlayButtonClick.bind(this);
@@ -22,8 +23,22 @@ export class AudioPlayer extends Component {
     }
   }
 
+  componentWillUnmount() {
+    const audio = this._audio;
+
+    Object.assign(audio, {
+      oncanplaythrough: null,
+      onplay: null,
+      onpause: null,
+      ontimeupdate: null,
+      src: null,
+    });
+
+    this._audio = null;
+  }
+
   componentDidUpdate() {
-    const {state: {isLoading, isPlaying}} = this;
+    const {state: {isLoading}, props: {isPlaying}} = this;
     const audio = this._audio;
 
     if (!isLoading) {
@@ -36,7 +51,7 @@ export class AudioPlayer extends Component {
   }
 
   render() {
-    const {state: {isLoading, isPlaying}} = this;
+    const {state: {isLoading}, props: {isPlaying}} = this;
 
     return (
       <Fragment>
@@ -47,44 +62,53 @@ export class AudioPlayer extends Component {
           onClick={this._onPlayButtonClick}
         />
         <div className="track__status">
-          <audio />
+          <audio ref={this._audioRef} />
         </div>
       </Fragment>
     );
   }
 
   _setAudio() {
-    const {props: {src}} = this;
+    const {props: {src, isPlaying}} = this;
 
     this._audio = new Audio(src);
 
     const audio = this._audio;
 
-    this.setState({
+    const setState = this.setState.bind(this);
+
+    setState({
       progress: audio.currentTime,
       isLoading: true
     });
 
     Object.assign(audio, {
+      oncanplaythrough() {
+        setState({isLoading: false, isPlaying});
+      },
       onplay() {
-        this.setState({isPlaying: true});
+        setState({isPlaying: true});
       },
       onpause() {
-        this.setState({isPlaying: false});
+        setState({isPlaying: false});
       },
       ontimeupdate() {
-        this.setState({progress: audio.currentTime});
+        setState({progress: audio.currentTime});
+      },
+      onended() {
+        setState({progress: 0, isPlaying: false});
       }
     });
   }
 
   _onPlayButtonClick() {
-    this.setState({
-      isPlaying: !this.state.isPlaying
-    });
+    const {isPlaying} = this.props;
+    this.props.onTogglePlaying(!isPlaying);
   }
 }
 
 AudioPlayer.propTypes = {
-  src: string.isRequired
+  isPlaying: bool.isRequired,
+  onTogglePlaying: func.isRequired,
+  src: string.isRequired,
 };

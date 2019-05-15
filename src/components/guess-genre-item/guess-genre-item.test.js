@@ -13,6 +13,8 @@ describe(`GuessGenreItem`, () => {
         src={src}
         orderId={42}
         key={42}
+        isPlaying={false}
+        onTogglePlaying={jest.fn()}
       />
     ).toJSON();
 
