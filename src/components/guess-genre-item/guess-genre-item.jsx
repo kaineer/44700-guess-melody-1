@@ -1,8 +1,11 @@
 import React from 'react';
 import {string, number} from 'prop-types';
+import {AudioPlayer} from '../audio-player/audio-player';
 
-export const GuessGenreItem = ({orderId}) => (
+export const GuessGenreItem = ({src, orderId}) => (
   <div className="track">
+    <AudioPlayer {...{src}} />
+
     <button className="track__button track__button--play" type="button"></button>
     <div className="track__status">
       <audio></audio>
