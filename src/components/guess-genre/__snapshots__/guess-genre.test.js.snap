@@ -91,6 +91,8 @@ exports[`GuessGenre should render correctly 1`] = `
       >
         <button
           className="track__button track__button--play"
+          disabled={true}
+          onClick={[Function]}
           type="button"
         />
         <div
@@ -121,6 +123,8 @@ exports[`GuessGenre should render correctly 1`] = `
       >
         <button
           className="track__button track__button--play"
+          disabled={true}
+          onClick={[Function]}
           type="button"
         />
         <div
@@ -151,6 +155,8 @@ exports[`GuessGenre should render correctly 1`] = `
       >
         <button
           className="track__button track__button--play"
+          disabled={true}
+          onClick={[Function]}
           type="button"
         />
         <div
