@@ -1,6 +1,6 @@
 // src/reducer.js
 
-const initialState = {
+export const initialState = {
   step: -1,
   mistakes: 0
 };

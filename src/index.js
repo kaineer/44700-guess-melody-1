@@ -1,8 +1,13 @@
 import {App} from './components/app/app';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {createStore} from 'redux';
 
 import questions from './mocks/questions';
+
+import {reducer, initialState} from './reducer';
+
+const store = createStore(reducer, initialState);
 
 const init = () => {
   const config = {
