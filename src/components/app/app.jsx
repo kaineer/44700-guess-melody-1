@@ -1,5 +1,13 @@
 import React, {Component} from 'react';
-import {number, array} from 'prop-types';
+import {connect} from 'react-redux';
+import {number, array, func} from 'prop-types';
+
+import {ActionCreators} from '../../reducers/action-creators';
+
+const {
+  IncrementStep,
+  IncrementMistakes
+} = ActionCreators;
 
 const {isRequired: requiredNumber} = number;
 
@@ -8,35 +16,23 @@ import {GuessArtist} from '../guess-artist/guess-artist';
 import {GuessGenre} from '../guess-genre/guess-genre';
 
 export class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      question: -1
-    };
-  }
-
   render() {
-    const {gameTime, errorCount, questions} = this.props;
-    const {question} = this.state;
+    const {gameTime, errorCount, questions, step, mistakes, onUserAnswer} = this.props;
+    const question = questions[step];
 
-    const goNextQuestion = () => {
-      this.setState({
-        question: question < questions.length - 1 ? question + 1 : -1
-      });
-    };
-
-    if (this.state.question > -1) {
-      const currentQuestion = questions[question];
-
-      switch (currentQuestion.type) {
+    if (step > -1) {
+      switch (question.type) {
         case `artist`:
           return (
-            <GuessArtist question={currentQuestion} onSubmit={goNextQuestion} />
+            <GuessArtist
+              {...{onUserAnswer, question, mistakes}}
+            />
           );
         case `genre`:
           return (
-            <GuessGenre question={currentQuestion} onSubmit={goNextQuestion} />
+            <GuessGenre
+              {...{onUserAnswer, question, mistakes}}
+            />
           );
       }
     }
@@ -45,7 +41,7 @@ export class App extends Component {
       <WelcomeScreen
         time={gameTime}
         errorCount={errorCount}
-        onClick={goNextQuestion}
+        onClick={onUserAnswer}
       />
     );
   }
@@ -54,5 +50,24 @@ export class App extends Component {
 App.propTypes = {
   gameTime: requiredNumber,
   errorCount: requiredNumber,
-  questions: array
+  questions: array,
+  step: number.isRequired,
+  mistakes: number.isRequired,
+  onUserAnswer: func.isRequired
 };
+
+const mapStateToProps = ({step, mistakes}, ownProps) => Object.assign({}, ownProps, {
+  step, mistakes
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onUserAnswer: (question, userAnswer) => {
+    dispatch(IncrementStep());
+    dispatch(IncrementMistakes(question, userAnswer));
+  }
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

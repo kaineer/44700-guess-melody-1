@@ -16,12 +16,13 @@ export class GuessArtist extends Component {
   }
 
   render() {
-    const {question: {answers, song: {src}}, onSubmit} = this.props;
+    const {question, onUserAnswer, mistakes} = this.props;
+    const {answers, song: {src}} = question;
     const {isPlaying} = this.state;
 
     return (
       <section className="game game--artist">
-        <GameHeader />
+        <GameHeader {...{mistakes}} />
 
         <section className="game__screen">
           <h2 className="game__title">Кто исполняет эту песню?</h2>
@@ -37,11 +38,9 @@ export class GuessArtist extends Component {
           <form className="game__artist">
             {answers.map((answer, orderId) => (
               <GuessArtistItem
-                key={orderId}
-                picture={answer.picture}
-                artist={answer.artist}
-                orderId={orderId}
-                onClick={onSubmit}
+                key={`guess-artist-${orderId}`}
+                {...answer}
+                {...{orderId, question, onUserAnswer}}
               />
             ))}
           </form>
@@ -62,5 +61,5 @@ GuessArtist.propTypes = {
       artist: string
     }))
   }),
-  onSubmit: func
+  onUserAnswer: func.isRequired
 };

@@ -1,11 +1,12 @@
-import {App} from './components/app/app';
+import App from './components/app/app';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {createStore} from 'redux';
+import {Provider} from 'react-redux';
 
 import questions from './mocks/questions';
 
-import {reducer, initialState} from './reducer';
+import {reducer, initialState} from './reducers/reducer';
 
 const store = createStore(reducer, initialState);
 
@@ -16,11 +17,13 @@ const init = () => {
   };
 
   ReactDOM.render(
-      <App
-        errorCount={config.errorCount}
-        gameTime={config.gameTime}
-        questions={questions}
-      />,
+      <Provider store={store}>
+        <App
+          errorCount={config.errorCount}
+          gameTime={config.gameTime}
+          questions={questions}
+        />
+      </Provider>,
       document.querySelector(`.main`)
   );
 };
