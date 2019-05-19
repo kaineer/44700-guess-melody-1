@@ -15,6 +15,7 @@ describe(`GuessGenreItem`, () => {
         key={42}
         isPlaying={false}
         onTogglePlaying={jest.fn()}
+        onChange={jest.fn()}
       />
     ).toJSON();
 
