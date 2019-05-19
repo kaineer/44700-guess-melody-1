@@ -25,13 +25,15 @@ export class App extends Component {
         case `artist`:
           return (
             <GuessArtist
-              {...{onUserAnswer, question}}
+              onUserAnswer={(userAnswer) => onUserAnswer(question, userAnswer)}
+              {...{question}}
             />
           );
         case `genre`:
           return (
             <GuessGenre
-              {...{onUserAnswer, question}}
+              onUserAnswer={(userAnswer) => onUserAnswer(question, userAnswer)}
+              {...{question}}
             />
           );
       }

@@ -1,8 +1,7 @@
 import React from 'react';
-import {number, string, func, shape} from 'prop-types';
-import {artistQuestionType} from '../../prop-types';
+import {number, string, func} from 'prop-types';
 
-export const GuessArtistItem = ({question, artist, picture, orderId, onUserAnswer}) => (
+export const GuessArtistItem = ({artist, picture, orderId, onUserAnswer}) => (
   <div className="artist">
     <input
       className="artist__input visually-hidden"
@@ -10,7 +9,7 @@ export const GuessArtistItem = ({question, artist, picture, orderId, onUserAnswe
       name="answer"
       value={`artist-${orderId}`}
       id={`answer-${orderId}`}
-      onClick={() => onUserAnswer(question, {artist})}
+      onClick={() => onUserAnswer({artist})}
     />
     <label className="artist__name" htmlFor={`answer-${orderId}`}>
       <img className="artist__picture" src={picture} alt={artist} />
@@ -20,7 +19,6 @@ export const GuessArtistItem = ({question, artist, picture, orderId, onUserAnswe
 );
 
 GuessArtistItem.propTypes = {
-  question: shape(artistQuestionType),
   artist: string.isRequired,
   picture: string.isRequired,
   orderId: number.isRequired,

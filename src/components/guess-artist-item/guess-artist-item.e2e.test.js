@@ -65,7 +65,7 @@ describe(`GuessArtistItem e2e`, () => {
     });
 
     it(`should call clickHandler with specified artist`, () => {
-      expect(clickHandler).toHaveBeenCalledWith(question, {artist: `One`});
+      expect(clickHandler).toHaveBeenCalledWith({artist: `One`});
     });
   });
 });

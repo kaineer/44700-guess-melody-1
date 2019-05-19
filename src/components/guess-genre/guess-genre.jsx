@@ -1,9 +1,11 @@
 // src/components/guess-genre/guess-genre.jsx
 
 import React, {Component} from 'react';
-import {string, func, shape, arrayOf} from 'prop-types';
+import {func, shape} from 'prop-types';
 import {GameHeader} from '../game-header/game-header';
 import {GuessGenreItem} from '../guess-genre-item/guess-genre-item';
+
+import {genreQuestionType} from '../../prop-types';
 
 export class GuessGenre extends Component {
   constructor(props) {
@@ -47,7 +49,7 @@ export class GuessGenre extends Component {
 
             <button className="game__submit button" type="submit" onClick={(e) => {
               e.preventDefault();
-              onUserAnswer(this.props.question, this.state.userAnswer);
+              onUserAnswer(this.state.userAnswer);
             }}>Ответить</button>
           </form>
         </section>
@@ -57,12 +59,6 @@ export class GuessGenre extends Component {
 }
 
 GuessGenre.propTypes = {
-  question: shape({
-    genre: string,
-    answers: arrayOf(shape({
-      src: string.isRequired,
-      genre: string.isRequired
-    })),
-  }),
+  question: shape(genreQuestionType),
   onUserAnswer: func.isRequired
 };
