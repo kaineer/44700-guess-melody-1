@@ -5,7 +5,7 @@ const {RESET_STEP, INCREMENT_STEP, INCREMENT_MISTAKES} = ActionTypes;
 
 const resetStep = () => ({type: RESET_STEP});
 const incrementStep = () => ({type: INCREMENT_STEP});
-const incrementMistakes = (question, userAnswer) => {
+const incrementMistakes = (question, userAnswer, mistakes, errorCount) => {
   if (question) {
     const {type} = question;
     let correctAnswer;
@@ -22,10 +22,11 @@ const incrementMistakes = (question, userAnswer) => {
         break;
     }
 
-    return {
-      type: INCREMENT_MISTAKES,
-      payload: correctAnswer ? 0 : 1,
-    };
+    if (!correctAnswer && mistakes + 1 >= errorCount) {
+      return {type: RESET_STEP};
+    } else {
+      return {type: INCREMENT_MISTAKES, payload: correctAnswer ? 0 : 1};
+    }
   } else {
     return {type: INCREMENT_MISTAKES, payload: 0};
   }

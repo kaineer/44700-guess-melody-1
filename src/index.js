@@ -13,7 +13,7 @@ const store = createStore(reducer, initialState);
 const init = () => {
   const config = {
     gameTime: 7,
-    errorCount: 4
+    errorCount: 3
   };
 
   ReactDOM.render(

@@ -17,7 +17,7 @@ import {GuessGenre} from '../guess-genre/guess-genre';
 
 export class App extends Component {
   render() {
-    const {gameTime, errorCount, questions, step, onUserAnswer} = this.props;
+    const {gameTime, errorCount, questions, step, mistakes, onUserAnswer} = this.props;
     const question = questions[step];
 
     if (step > -1) {
@@ -25,14 +25,14 @@ export class App extends Component {
         case `artist`:
           return (
             <GuessArtist
-              onUserAnswer={(userAnswer) => onUserAnswer(question, userAnswer)}
+              onUserAnswer={(userAnswer) => onUserAnswer(question, userAnswer, mistakes, errorCount /* , questions.length */)}
               {...{question}}
             />
           );
         case `genre`:
           return (
             <GuessGenre
-              onUserAnswer={(userAnswer) => onUserAnswer(question, userAnswer)}
+              onUserAnswer={(userAnswer) => onUserAnswer(question, userAnswer, mistakes, errorCount /* , questions.length */)}
               {...{question}}
             />
           );
@@ -63,9 +63,9 @@ const mapStateToProps = ({step, mistakes}, ownProps) => Object.assign({}, ownPro
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onUserAnswer: (question, userAnswer) => {
+  onUserAnswer: (question, userAnswer, mistakes, errorCount /* , length */) => {
     dispatch(incrementStep());
-    dispatch(incrementMistakes(question, userAnswer));
+    dispatch(incrementMistakes(question, userAnswer, mistakes, errorCount));
   }
 });
 
