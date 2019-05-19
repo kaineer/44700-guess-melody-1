@@ -10,6 +10,8 @@ const [_, artistQuestion] = questions;
 
 configure({adapter: new Adapter()});
 
+import {MockProvider} from '../../mocks/store';
+
 describe(`GuessArtist e2e`, () => {
   let screen;
   let submitHandler;
@@ -18,10 +20,12 @@ describe(`GuessArtist e2e`, () => {
     submitHandler = jest.fn();
 
     screen = mount(
-      <GuessArtist
-        question={artistQuestion}
-        onSubmit={submitHandler}
-      />
+      <MockProvider>
+        <GuessArtist
+          question={artistQuestion}
+          onUserAnswer={submitHandler}
+        />
+      </MockProvider>
     );
   });
 
