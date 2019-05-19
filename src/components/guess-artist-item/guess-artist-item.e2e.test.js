@@ -35,13 +35,14 @@ describe(`GuessArtistItem e2e`, () => {
     clickHandler = jest.fn();
     screen = shallow(
         <GuessArtistItem
+          question={question}
           picture={picture}
           artist={artist}
-          onClick={clickHandler}
+          onUserAnswer={clickHandler}
           orderId={42}
         />
     );
-    link = screen.find(`.artist__input`);
+    link = screen.find(`.artist__input`).first();
   });
 
   it(`should have a link`, () => {
@@ -61,6 +62,10 @@ describe(`GuessArtistItem e2e`, () => {
 
     it(`should call clickHandler`, () => {
       expect(clickHandler).toHaveBeenCalledTimes(1);
+    });
+
+    it(`should call clickHandler with specified artist`, () => {
+      expect(clickHandler).toHaveBeenCalledWith({artist: `One`});
     });
   });
 });

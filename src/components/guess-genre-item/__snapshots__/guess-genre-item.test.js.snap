@@ -26,6 +26,7 @@ exports[`GuessGenreItem should render correctly 1`] = `
       className="game__input visually-hidden"
       id="answer-42"
       name="answer"
+      onChange={[MockFunction]}
       type="checkbox"
       value="answer-42"
     />

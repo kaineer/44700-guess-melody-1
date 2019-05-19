@@ -1,21 +1,25 @@
 // src/components/guess-genre/guess-genre.jsx
 
 import React, {Component} from 'react';
-import {string, func, shape, arrayOf} from 'prop-types';
+import {func, shape} from 'prop-types';
 import {GameHeader} from '../game-header/game-header';
 import {GuessGenreItem} from '../guess-genre-item/guess-genre-item';
+
+import {genreQuestionType} from '../../prop-types';
 
 export class GuessGenre extends Component {
   constructor(props) {
     super(props);
+    const {question: {answers}} = this.props;
 
     this.state = {
       activePlayer: -1, // none
+      userAnswer: new Array(answers.length).fill(false)
     };
   }
 
   render() {
-    const {question: {answers}, onSubmit} = this.props;
+    const {question: {answers}, onUserAnswer} = this.props;
     const {activePlayer} = this.state;
 
     return (
@@ -35,10 +39,18 @@ export class GuessGenre extends Component {
                 onTogglePlaying={(flag) => this.setState({
                   activePlayer: flag ? orderId : -1
                 })}
+                onChange={() => {
+                  const userAnswer = this.state.userAnswer.slice();
+                  userAnswer[orderId] = !userAnswer[orderId];
+                  this.setState({userAnswer});
+                }}
               />
             ))}
 
-            <button className="game__submit button" type="submit" onClick={onSubmit}>Ответить</button>
+            <button className="game__submit button" type="submit" onClick={(e) => {
+              e.preventDefault();
+              onUserAnswer(this.state.userAnswer);
+            }}>Ответить</button>
           </form>
         </section>
       </section>
@@ -47,12 +59,6 @@ export class GuessGenre extends Component {
 }
 
 GuessGenre.propTypes = {
-  question: shape({
-    genre: string,
-    answers: arrayOf(shape({
-      src: string,
-      genre: string
-    })),
-  }),
-  onSubmit: func
+  question: shape(genreQuestionType),
+  onUserAnswer: func.isRequired
 };

@@ -61,16 +61,6 @@ exports[`GameHeader should render correctly 1`] = `
   </div>
   <div
     className="game__mistakes"
-  >
-    <div
-      className="wrong"
-    />
-    <div
-      className="wrong"
-    />
-    <div
-      className="wrong"
-    />
-  </div>
+  />
 </header>
 `;

@@ -2,6 +2,7 @@
 
 import React, {Component} from 'react';
 import {func} from 'prop-types';
+import Mistakes from '../mistakes/mistakes';
 
 export class GameHeader extends Component {
   render() {
@@ -26,11 +27,7 @@ export class GameHeader extends Component {
           <span className="timer__secs">00</span>
         </div>
 
-        <div className="game__mistakes">
-          <div className="wrong"></div>
-          <div className="wrong"></div>
-          <div className="wrong"></div>
-        </div>
+        <Mistakes />
       </header>
     );
   }

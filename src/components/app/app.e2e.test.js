@@ -2,7 +2,8 @@ import React from 'react';
 import {configure, mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import {App} from './app';
+import App from './app';
+import {MockProvider} from '../../mocks/store';
 
 import questions from '../../mocks/questions';
 
@@ -13,11 +14,13 @@ describe(`App e2e`, () => {
 
   beforeEach(() => {
     app = mount(
+      <MockProvider>
         <App
           gameTime={3}
           errorCount={11}
           questions={questions}
         />
+      </MockProvider>
     );
   });
 

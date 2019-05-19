@@ -1,10 +1,12 @@
 // src/components/guess-artist/guess-artist.jsx
 
 import React, {Component} from 'react';
-import {string, shape, func, arrayOf} from 'prop-types';
+import {shape, func} from 'prop-types';
 import {GameHeader} from '../game-header/game-header';
 import {GuessArtistItem} from '../guess-artist-item/guess-artist-item';
 import {AudioPlayer} from '../audio-player/audio-player';
+
+import {artistQuestionType} from '../../prop-types';
 
 export class GuessArtist extends Component {
   constructor(props) {
@@ -16,7 +18,8 @@ export class GuessArtist extends Component {
   }
 
   render() {
-    const {question: {answers, song: {src}}, onSubmit} = this.props;
+    const {question, onUserAnswer} = this.props;
+    const {answers, song: {src}} = question;
     const {isPlaying} = this.state;
 
     return (
@@ -37,11 +40,9 @@ export class GuessArtist extends Component {
           <form className="game__artist">
             {answers.map((answer, orderId) => (
               <GuessArtistItem
-                key={orderId}
-                picture={answer.picture}
-                artist={answer.artist}
-                orderId={orderId}
-                onClick={onSubmit}
+                key={`guess-artist-${orderId}`}
+                {...answer}
+                {...{orderId, question, onUserAnswer}}
               />
             ))}
           </form>
@@ -52,15 +53,6 @@ export class GuessArtist extends Component {
 }
 
 GuessArtist.propTypes = {
-  question: shape({
-    song: shape({
-      artist: string,
-      src: string
-    }),
-    answers: arrayOf(shape({
-      picture: string,
-      artist: string
-    }))
-  }),
-  onSubmit: func
+  question: shape(artistQuestionType),
+  onUserAnswer: func.isRequired
 };

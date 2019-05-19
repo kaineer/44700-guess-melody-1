@@ -45,5 +45,7 @@ const artistQuestion = {
 
 module.exports = [
   genreQuestion,
-  artistQuestion
+  artistQuestion,
+  // artistQuestion,
+  // artistQuestion,
 ];
