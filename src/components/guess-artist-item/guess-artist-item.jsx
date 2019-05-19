@@ -1,5 +1,6 @@
 import React from 'react';
-import {string, number, func} from 'prop-types';
+import {number, string, func, shape} from 'prop-types';
+import {artistQuestionType} from '../../prop-types';
 
 export const GuessArtistItem = ({question, artist, picture, orderId, onUserAnswer}) => (
   <div className="artist">
@@ -19,6 +20,7 @@ export const GuessArtistItem = ({question, artist, picture, orderId, onUserAnswe
 );
 
 GuessArtistItem.propTypes = {
+  question: shape(artistQuestionType),
   artist: string.isRequired,
   picture: string.isRequired,
   orderId: number.isRequired,
