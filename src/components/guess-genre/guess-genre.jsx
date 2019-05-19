@@ -22,7 +22,7 @@ export class GuessGenre extends Component {
 
     return (
       <section className="game game--genre">
-        <GameHeader {...{mistakes}} />
+        <GameHeader />
 
         <section className="game__screen">
           <h2 className="game__title">Выберите инди-рок треки</h2>

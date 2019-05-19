@@ -20,15 +20,13 @@ const reducers = {
     if (newStep >= questions.length) {
       return initialState;
     } else {
-      return {
-        ...prevState, step: newStep,
-      };
+      return Object.assign({}, prevState, {step: newStep});
     }
   },
-  [INCREMENT_MISTAKES]: (prevState, {payload = 1}) => ({
-    ...prevState, mistakes: prevState.mistakes + payload
-  }),
-  [RESET_STEP]: (prevState, action) => initialState
+  [INCREMENT_MISTAKES]: (prevState, {payload = 1}) => (
+    Object.assign({}, prevState, {mistakes: prevState.mistakes + payload})
+  ),
+  [RESET_STEP]: () => initialState
 };
 
 export const reducer = (prevState, action) => {

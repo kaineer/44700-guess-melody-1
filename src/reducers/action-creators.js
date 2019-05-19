@@ -3,9 +3,9 @@
 import {ActionTypes} from './action-types';
 const {RESET_STEP, INCREMENT_STEP, INCREMENT_MISTAKES} = ActionTypes;
 
-const ResetStep = () => ({type: RESET_STEP});
-const IncrementStep = () => ({type: INCREMENT_STEP});
-const IncrementMistakes = (question, userAnswer) => {
+const resetStep = () => ({type: RESET_STEP});
+const incrementStep = () => ({type: INCREMENT_STEP});
+const incrementMistakes = (question, userAnswer) => {
   if (question) {
     const {type} = question;
     let correctAnswer;
@@ -32,5 +32,5 @@ const IncrementMistakes = (question, userAnswer) => {
 };
 
 export const ActionCreators = {
-  ResetStep, IncrementStep, IncrementMistakes
+  resetStep, incrementStep, incrementMistakes
 };

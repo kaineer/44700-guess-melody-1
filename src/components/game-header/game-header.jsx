@@ -2,11 +2,11 @@
 
 import React, {Component} from 'react';
 import {func} from 'prop-types';
-import {Mistakes} from '../mistakes/mistakes';
+import Mistakes from '../mistakes/mistakes';
 
 export class GameHeader extends Component {
   render() {
-    const {onBackClick, mistakes} = this.props;
+    const {onBackClick} = this.props;
 
     return (
       <header className="game__header">
@@ -27,7 +27,7 @@ export class GameHeader extends Component {
           <span className="timer__secs">00</span>
         </div>
 
-        <Mistakes {...{mistakes}} />
+        <Mistakes />
       </header>
     );
   }

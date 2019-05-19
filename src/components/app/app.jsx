@@ -5,8 +5,8 @@ import {number, array, func} from 'prop-types';
 import {ActionCreators} from '../../reducers/action-creators';
 
 const {
-  IncrementStep,
-  IncrementMistakes
+  incrementStep,
+  incrementMistakes
 } = ActionCreators;
 
 const {isRequired: requiredNumber} = number;
@@ -17,7 +17,7 @@ import {GuessGenre} from '../guess-genre/guess-genre';
 
 export class App extends Component {
   render() {
-    const {gameTime, errorCount, questions, step, mistakes, onUserAnswer} = this.props;
+    const {gameTime, errorCount, questions, step, onUserAnswer} = this.props;
     const question = questions[step];
 
     if (step > -1) {
@@ -25,13 +25,13 @@ export class App extends Component {
         case `artist`:
           return (
             <GuessArtist
-              {...{onUserAnswer, question, mistakes}}
+              {...{onUserAnswer, question}}
             />
           );
         case `genre`:
           return (
             <GuessGenre
-              {...{onUserAnswer, question, mistakes}}
+              {...{onUserAnswer, question}}
             />
           );
       }
@@ -62,12 +62,12 @@ const mapStateToProps = ({step, mistakes}, ownProps) => Object.assign({}, ownPro
 
 const mapDispatchToProps = (dispatch) => ({
   onUserAnswer: (question, userAnswer) => {
-    dispatch(IncrementStep());
-    dispatch(IncrementMistakes(question, userAnswer));
+    dispatch(incrementStep());
+    dispatch(incrementMistakes(question, userAnswer));
   }
 });
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(App);

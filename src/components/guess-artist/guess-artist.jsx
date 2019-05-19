@@ -16,13 +16,13 @@ export class GuessArtist extends Component {
   }
 
   render() {
-    const {question, onUserAnswer, mistakes} = this.props;
+    const {question, onUserAnswer} = this.props;
     const {answers, song: {src}} = question;
     const {isPlaying} = this.state;
 
     return (
       <section className="game game--artist">
-        <GameHeader {...{mistakes}} />
+        <GameHeader />
 
         <section className="game__screen">
           <h2 className="game__title">Кто исполняет эту песню?</h2>
