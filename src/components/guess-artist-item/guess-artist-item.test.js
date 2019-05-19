@@ -32,6 +32,7 @@ describe(`GuessArtistItem`, () => {
         orderId={42}
         key={42}
         onClick={clickHandler}
+        onUserAnswer={jest.fn()}
       />
     ).toJSON();
 

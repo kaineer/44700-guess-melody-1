@@ -35,6 +35,7 @@ describe(`GuessArtistItem e2e`, () => {
     clickHandler = jest.fn();
     screen = shallow(
         <GuessArtistItem
+          question={question}
           picture={picture}
           artist={artist}
           onUserAnswer={clickHandler}
@@ -64,7 +65,7 @@ describe(`GuessArtistItem e2e`, () => {
     });
 
     it(`should call clickHandler with specified artist`, () => {
-      expect(clickHandler).toHaveBeenCalledWith({artist: `One`});
+      expect(clickHandler).toHaveBeenCalledWith(question, {artist: `One`});
     });
   });
 });
