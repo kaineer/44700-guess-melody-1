@@ -5,6 +5,7 @@ import Adapter from 'enzyme-adapter-react-16';
 Enzyme.configure({adapter: new Adapter()});
 
 import {GuessGenre} from './guess-genre';
+import {MockProvider} from '../../mocks/store';
 
 import questions from '../../mocks/questions';
 
@@ -18,10 +19,12 @@ describe(`GuessGenre e2e`, () => {
     submitHandler = jest.fn();
 
     screen = mount(
-      <GuessGenre
-        onSubmit={submitHandler}
-        question={genreQuestion}
-      />
+      <MockProvider>
+        <GuessGenre
+          onUserAnswer={submitHandler}
+          question={genreQuestion}
+        />
+      </MockProvider>
     );
   });
 

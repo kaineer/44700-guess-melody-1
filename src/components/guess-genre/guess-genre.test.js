@@ -6,13 +6,17 @@ import questions from '../../mocks/questions';
 
 const [genreQuestion, _] = questions;
 
+import {MockProvider} from '../../mocks/store';
+
 describe(`GuessGenre`, () => {
   it(`should render correctly`, () => {
     const tree = create(
+      <MockProvider>
         <GuessGenre
           question={genreQuestion}
-          onSubmit={() => null}
+          onUserAnswer={jest.fn()}
         />
+      </MockProvider>
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
