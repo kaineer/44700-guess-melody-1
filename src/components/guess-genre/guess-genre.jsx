@@ -17,7 +17,7 @@ export class GuessGenre extends Component {
   }
 
   render() {
-    const {question: {answers}, onUserAnswer, mistakes} = this.props;
+    const {question: {answers}, onUserAnswer} = this.props;
     const {activePlayer} = this.state;
 
     return (
