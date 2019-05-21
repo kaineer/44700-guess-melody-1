@@ -17,9 +17,11 @@ describe('AudioPlayer e2e', () => {
 
       player = shallow(
         <AudioPlayer
+          isLoading={false}
           isPlaying={false}
           src={snapshotDummyURL}
           onTogglePlaying={clickHandler}
+          addAudioListeners={jest.fn()}
         />
       );
 
@@ -57,8 +59,10 @@ describe('AudioPlayer e2e', () => {
       player = shallow(
         <AudioPlayer
           isPlaying={true}
+          isLoading={false}
           src={snapshotDummyURL}
           onTogglePlaying={clickHandler}
+          addAudioListeners={jest.fn()}
         />
       );
 

@@ -23,6 +23,9 @@ describe(`GuessGenre e2e`, () => {
         <GuessGenre
           onUserAnswer={submitHandler}
           question={genreQuestion}
+          activePlayer={-1}
+          onToggleAnswer={jest.fn()}
+          onTogglePlaying={jest.fn()}
         />
       </MockProvider>
     );

@@ -24,6 +24,9 @@ describe(`GuessArtist e2e`, () => {
         <GuessArtist
           question={artistQuestion}
           onUserAnswer={submitHandler}
+
+          isPlaying={false}
+          onTogglePlaying={jest.fn()}
         />
       </MockProvider>
     );

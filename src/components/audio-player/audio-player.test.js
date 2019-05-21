@@ -8,8 +8,10 @@ describe(`<AudioPlayer />`, () => {
     const tree = create(
         <AudioPlayer
           src={snapshotDummyURL}
+          isLoading={false}
           isPlaying={false}
           onTogglePlaying={jest.fn()}
+          addAudioListeners={jest.fn()}
         />
     ).toJSON();
 
