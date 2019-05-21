@@ -17,9 +17,10 @@ import {GuessGenre} from '../guess-genre/guess-genre';
 
 import {withIsPlaying} from '../../hocs/with-is-playing/with-is-playing';
 import {withUserAnswer} from '../../hocs/with-user-answer/with-user-answer';
+import {withActivePlayer} from '../../hocs/with-active-player/with-active-player';
 
 const GuessArtistWrapped = withIsPlaying(GuessArtist);
-const GuessGenreWrapped = withUserAnswer(GuessGenre);
+const GuessGenreWrapped = withActivePlayer(withUserAnswer(GuessGenre));
 
 export class App extends Component {
   render() {
