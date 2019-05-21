@@ -9,11 +9,6 @@ export class AudioPlayer extends Component {
 
     this._audioRef = createRef();
 
-    this.state = {
-      progress: 0,
-      isLoading: false,
-    };
-
     this._onPlayButtonClick = this._onPlayButtonClick.bind(this);
   }
 
@@ -23,35 +18,8 @@ export class AudioPlayer extends Component {
     }
   }
 
-  componentWillUnmount() {
-    const audio = this._audio;
-
-    Object.assign(audio, {
-      oncanplaythrough: null,
-      onplay: null,
-      onpause: null,
-      ontimeupdate: null,
-      src: null,
-    });
-
-    this._audio = null;
-  }
-
-  componentDidUpdate() {
-    const {state: {isLoading}, props: {isPlaying}} = this;
-    const audio = this._audio;
-
-    if (!isLoading) {
-      if (isPlaying) {
-        audio.play();
-      } else {
-        audio.pause();
-      }
-    }
-  }
-
   render() {
-    const {state: {isLoading}, props: {isPlaying}} = this;
+    const {isLoading, isPlaying} = this.props;
     const buttonModifier = `track__button--${isPlaying ? `pause` : `play`}`;
 
     return (
@@ -70,46 +38,21 @@ export class AudioPlayer extends Component {
   }
 
   _setAudio() {
-    const {props: {src, isPlaying}} = this;
-
-    this._audio = new Audio(src);
-
-    const audio = this._audio;
-
-    const setState = this.setState.bind(this);
-
-    setState({
-      progress: audio.currentTime,
-      isLoading: true
-    });
-
-    Object.assign(audio, {
-      oncanplaythrough() {
-        setState({isLoading: false, isPlaying});
-      },
-      onplay() {
-        setState({isPlaying: true});
-      },
-      onpause() {
-        setState({isPlaying: false});
-      },
-      ontimeupdate() {
-        setState({progress: audio.currentTime});
-      },
-      onended() {
-        setState({progress: 0, isPlaying: false});
-      }
-    });
+    const {src, addAudioListeners} = this.props;
+    addAudioListeners(new Audio(src));
   }
 
   _onPlayButtonClick() {
-    const {isPlaying} = this.props;
-    this.props.onTogglePlaying(!isPlaying);
+    const {isPlaying, onTogglePlaying} = this.props;
+    onTogglePlaying(!isPlaying);
   }
 }
 
 AudioPlayer.propTypes = {
   isPlaying: bool.isRequired,
-  onTogglePlaying: func.isRequired,
+  isLoading: bool.isRequired,
   src: string.isRequired,
+
+  onTogglePlaying: func.isRequired,
+  addAudioListeners: func.isRequired,
 };

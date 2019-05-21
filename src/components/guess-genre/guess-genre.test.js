@@ -15,6 +15,9 @@ describe(`GuessGenre`, () => {
         <GuessGenre
           question={genreQuestion}
           onUserAnswer={jest.fn()}
+          activePlayer={-1}
+          onToggleAnswer={jest.fn()}
+          onTogglePlaying={jest.fn()}
         />
       </MockProvider>
     ).toJSON();
