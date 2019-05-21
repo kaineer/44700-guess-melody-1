@@ -15,6 +15,10 @@ import {WelcomeScreen} from '../welcome-screen/welcome-screen';
 import {GuessArtist} from '../guess-artist/guess-artist';
 import {GuessGenre} from '../guess-genre/guess-genre';
 
+import {withIsPlaying} from '../../hocs/with-is-playing/with-is-playing';
+
+const GuessArtistWrapped = withIsPlaying(GuessArtist);
+
 export class App extends Component {
   render() {
     const {gameTime, errorCount, questions, step, mistakes, onUserAnswer} = this.props;
@@ -24,7 +28,7 @@ export class App extends Component {
       switch (question.type) {
         case `artist`:
           return (
-            <GuessArtist
+            <GuessArtistWrapped
               onUserAnswer={(userAnswer) => onUserAnswer(question, userAnswer, mistakes, errorCount /* , questions.length */)}
               {...{question}}
             />

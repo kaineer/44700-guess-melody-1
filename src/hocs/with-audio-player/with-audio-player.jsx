@@ -18,10 +18,11 @@ export const withAudioPlayer = (PlayerComponent) => {
 
     render () {
       const {src, onTogglePlaying, isPlaying} = this.props;
+      const {isLoading} = this.state;
 
       return (
         <PlayerComponent
-          {...{src, onTogglePlaying, isPlaying}}
+          {...{src, onTogglePlaying, isPlaying, isLoading}}
           addAudioListeners={this._addAudioListeners}
         />
       );

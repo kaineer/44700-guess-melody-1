@@ -1,7 +1,7 @@
 // src/components/guess-artist/guess-artist.jsx
 
 import React, {Component} from 'react';
-import {shape, func} from 'prop-types';
+import {shape, func, bool} from 'prop-types';
 import {GameHeader} from '../game-header/game-header';
 import {GuessArtistItem} from '../guess-artist-item/guess-artist-item';
 import {AudioPlayer} from '../audio-player/audio-player';
@@ -14,16 +14,11 @@ import {artistQuestionType} from '../../prop-types';
 export class GuessArtist extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      isPlaying: false,
-    };
   }
 
   render() {
-    const {question, onUserAnswer} = this.props;
+    const {question, isPlaying, onUserAnswer, onTogglePlaying} = this.props;
     const {answers, song: {src}} = question;
-    const {isPlaying} = this.state;
 
     return (
       <section className="game game--artist">
@@ -33,10 +28,7 @@ export class GuessArtist extends Component {
           <h2 className="game__title">Кто исполняет эту песню?</h2>
           <div className="game__track">
             <AudioPlayerWrapped
-              {...{src, isPlaying}}
-              onTogglePlaying={
-                (flag) => this.setState({isPlaying: flag})
-              }
+              {...{src, isPlaying, onTogglePlaying}}
             />
           </div>
 
@@ -56,6 +48,8 @@ export class GuessArtist extends Component {
 }
 
 GuessArtist.propTypes = {
+  isPlaying: bool.isRequired,
+  onTogglePlaying: func.isRequired,
   question: shape(artistQuestionType),
   onUserAnswer: func.isRequired
 };
