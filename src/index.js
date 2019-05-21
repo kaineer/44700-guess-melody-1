@@ -8,7 +8,11 @@ import questions from './mocks/questions';
 
 import {reducer, initialState} from './reducers/reducer';
 
-const store = createStore(reducer, initialState);
+const store = createStore(
+  reducer,
+  initialState,
+  (window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+);
 
 const init = () => {
   const config = {
