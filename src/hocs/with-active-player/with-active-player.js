@@ -18,7 +18,7 @@ export const withActivePlayer = (Component) => {
       return (
         <Component
           {...this.props}
-          {...{activePlayer}}
+          activePlayer={activePlayer}
           onTogglePlaying={(flag, orderId) => {
             this.setState({
               activePlayer: flag ? orderId : -1
