@@ -10,16 +10,14 @@ import {genreQuestionType} from '../../prop-types';
 export class GuessGenre extends Component {
   constructor(props) {
     super(props);
-    const {question: {answers}} = this.props;
 
     this.state = {
       activePlayer: -1, // none
-      userAnswer: new Array(answers.length).fill(false)
     };
   }
 
   render() {
-    const {question: {answers}, onUserAnswer} = this.props;
+    const {question: {answers}, onUserAnswer, onToggleAnswer} = this.props;
     const {activePlayer} = this.state;
 
     return (
@@ -39,17 +37,13 @@ export class GuessGenre extends Component {
                 onTogglePlaying={(flag) => this.setState({
                   activePlayer: flag ? orderId : -1
                 })}
-                onChange={() => {
-                  const userAnswer = this.state.userAnswer.slice();
-                  userAnswer[orderId] = !userAnswer[orderId];
-                  this.setState({userAnswer});
-                }}
+                onChange={() => onToggleAnswer(orderId)}
               />
             ))}
 
             <button className="game__submit button" type="submit" onClick={(e) => {
               e.preventDefault();
-              onUserAnswer(this.state.userAnswer);
+              onUserAnswer();
             }}>Ответить</button>
           </form>
         </section>
@@ -60,5 +54,6 @@ export class GuessGenre extends Component {
 
 GuessGenre.propTypes = {
   question: shape(genreQuestionType),
-  onUserAnswer: func.isRequired
+  onUserAnswer: func.isRequired,
+  onToggleAnswer: func.isRequired,
 };

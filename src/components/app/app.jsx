@@ -16,8 +16,10 @@ import {GuessArtist} from '../guess-artist/guess-artist';
 import {GuessGenre} from '../guess-genre/guess-genre';
 
 import {withIsPlaying} from '../../hocs/with-is-playing/with-is-playing';
+import {withUserAnswer} from '../../hocs/with-user-answer/with-user-answer';
 
 const GuessArtistWrapped = withIsPlaying(GuessArtist);
+const GuessGenreWrapped = withUserAnswer(GuessGenre);
 
 export class App extends Component {
   render() {
@@ -35,7 +37,7 @@ export class App extends Component {
           );
         case `genre`:
           return (
-            <GuessGenre
+            <GuessGenreWrapped
               onUserAnswer={(userAnswer) => onUserAnswer(question, userAnswer, mistakes, errorCount /* , questions.length */)}
               {...{question}}
             />
