@@ -1,12 +1,15 @@
 import React from 'react';
 import {string, number, bool, func} from 'prop-types';
 import {AudioPlayer} from '../audio-player/audio-player';
+import {withAudioPlayer} from '../../hocs/with-audio-player/with-audio-player';
+
+const AudioPlayerWrapped = withAudioPlayer(AudioPlayer);
 
 export const GuessGenreItem = ({
   src, orderId, isPlaying, onTogglePlaying, onChange
 }) => (
   <div className="track">
-    <AudioPlayer {...{src, isPlaying, onTogglePlaying}} />
+    <AudioPlayerWrapped {...{src, isPlaying, onTogglePlaying}} />
 
     <div className="game__answer">
       <input
